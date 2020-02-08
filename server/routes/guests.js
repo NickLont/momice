@@ -3,7 +3,6 @@ const guestsController = require('../controllers/guests')
 
 router.get('/all', guestsController.allGuests)
 router.post('/guest', guestsController.postGuest)
-// router.get('/guest', guestsController.getEvent)
-// router.delete('/guest', guestsController.deleteEvent)
+router.delete('/guest', guestsController.deleteGuest)
 
 module.exports = router
