@@ -55,6 +55,9 @@ exports.getEvent = async (req, res, next) => {
     if (!name && !id) {
       throw new ErrorHandler(422, 'Event name or id is required')
     }
+    if (name && id) {
+      throw new ErrorHandler(422, 'Use either name OR id')
+    }
     if (name) {
       const event = await Event.findOne({ name }).populate('guests').catch(e => { throw new ErrorHandler(500, 'Database Error') })
       event ? res.status(200).json(event) : res.status(200).json({})
