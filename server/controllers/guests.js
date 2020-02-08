@@ -38,7 +38,7 @@ exports.postGuest = async (req, res, next) => {
       throw new ErrorHandler(422, 'firstName, lastName, email, birthDate, hobbies and eventId are required')
     }
     await validateMongooseId(eventId)
-    const event = await Event.findById(eventId)
+    const event = await Event.findById(eventId) // TODO Cache this
     // checking if an event with this id exists
     if (!event) throw new ErrorHandler(404, 'Event with this id does not exist')
     isValidTimestamp(birthDate)
