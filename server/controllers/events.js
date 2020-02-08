@@ -1,4 +1,5 @@
 const Event = require('../models/event')
+const eventSchema = require('../schemas/event.js')
 const { validateEvent, validateMongooseId } = require('../helpers/validations')
 const { ErrorHandler } = require('../helpers/errorHandlers')
 
@@ -31,7 +32,12 @@ exports.allEvents = async (req, res, next) => {
 // post an event
 exports.postEvent = async (req, res, next) => {
   const { name, description } = req.body
+  const { value, error } = eventSchema.validate({ name, description })
   try {
+    // return error response if name param is missing
+    if (error) {
+      throw new ErrorHandler(422, error.details[0].message)
+    }
     await validateEvent(name)
     const event = (description)
       ? new Event({

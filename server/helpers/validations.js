@@ -3,10 +3,6 @@ const Event = require('../models/event')
 const isValidId = require('mongoose').Types.ObjectId.isValid
 
 const validateEvent = async (name) => {
-  // return error response if name param is missing
-  if (!name) {
-    throw new ErrorHandler(422, 'Event name is required')
-  }
   // check if event name already exists, if yes return error response
   const existingEvent = await Event.findOne({ name })
   if (existingEvent) {

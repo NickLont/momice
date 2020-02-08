@@ -1,6 +1,7 @@
 const Guest = require('../models/guest')
 const Event = require('../models/event')
 const { validateMongooseId, isValidTimestamp } = require('../helpers/validations')
+const guestSchema = require('../schemas/guest')
 const { ErrorHandler } = require('../helpers/errorHandlers')
 
 // return all guests
@@ -33,9 +34,12 @@ exports.allGuests = async (req, res, next) => {
 // we don't need to check if a user exists here, it can be a case of the same name
 exports.postGuest = async (req, res, next) => {
   const { firstName, lastName, email, birthDate, hobbies, eventId } = req.body
+  // Schema validation
+  const { value, error } = guestSchema.validate({ firstName, lastName, email, birthDate, hobbies, eventId })
+
   try {
-    if (!firstName || !lastName || !email || !birthDate || !hobbies || !eventId) {
-      throw new ErrorHandler(422, 'firstName, lastName, email, birthDate, hobbies and eventId are required')
+    if (error) {
+      throw new ErrorHandler(422, error.details[0].message)
     }
     await validateMongooseId(eventId)
     const event = await Event.findById(eventId) // TODO Cache this
