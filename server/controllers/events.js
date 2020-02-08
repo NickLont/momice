@@ -1,7 +1,5 @@
-const mongoose = require('mongoose')
-const isValidId = mongoose.Types.ObjectId.isValid
-const { validateEvent } = require('../helpers/validations')
 const Event = require('../models/event')
+const { validateEvent, validateMongooseId } = require('../helpers/validations')
 const { ErrorHandler } = require('../helpers/errorHandlers')
 
 // return all events
@@ -62,12 +60,28 @@ exports.getEvent = async (req, res, next) => {
       event ? res.status(200).json(event) : res.status(200).json({})
     }
     if (id) {
-      // checking if the id is valid
-      if (!isValidId(id)) {
-        throw new ErrorHandler(401, 'Invalid ID')
-      }
+      await validateMongooseId(id)
       const event = await Event.findOne({ _id: id }).catch(e => { throw new ErrorHandler(500, 'Database Error') })
       event ? res.status(200).json(event) : res.status(200).json({})
+    }
+  } catch (e) {
+    next(e)
+  }
+}
+
+// delete an event
+exports.deleteEvent = async (req, res, next) => {
+  const { id } = req.body
+  try {
+    if (!id) {
+      throw new ErrorHandler(422, 'Id is required')
+    }
+    await validateMongooseId(id)
+    const deletedEvent = await Event.findByIdAndRemove(id)
+    console.log('deletedEvent: ', deletedEvent)
+    if (!deletedEvent) throw new ErrorHandler(404, 'Event with this id does not exist')
+    else {
+      res.status(200).json(deletedEvent)
     }
   } catch (e) {
     next(e)

@@ -1,5 +1,6 @@
 const { ErrorHandler } = require('../helpers/errorHandlers')
 const Event = require('../models/event')
+const isValidId = require('mongoose').Types.ObjectId.isValid
 
 const validateEvent = async (name) => {
   // return error response if name param is missing
@@ -13,6 +14,14 @@ const validateEvent = async (name) => {
   }
 }
 
+const validateMongooseId = async (id) => {
+  // checking if the id is valid
+  if (!isValidId(id)) {
+    throw new ErrorHandler(401, 'Invalid ID')
+  }
+}
+
 module.exports = {
-  validateEvent
+  validateEvent,
+  validateMongooseId
 }
