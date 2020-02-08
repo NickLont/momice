@@ -1,10 +1,9 @@
-const { ErrorHandler } = require('../helpers/errorHandlers')
-const Event = require('../models/event')
 const isValidId = require('mongoose').Types.ObjectId.isValid
+const { ErrorHandler } = require('../helpers/errorHandlers')
+const { getCachedEventByName } = require('../helpers/caching')
 
 const validateEvent = async (name) => {
-  // check if event name already exists, if yes return error response
-  const existingEvent = await Event.findOne({ name })
+  const existingEvent = await getCachedEventByName(name)
   if (existingEvent) {
     throw new ErrorHandler(422, 'Event name already exists')
   }

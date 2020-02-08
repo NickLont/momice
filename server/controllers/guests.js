@@ -3,6 +3,7 @@ const Event = require('../models/event')
 const { validateMongooseId, isValidTimestamp } = require('../helpers/validations')
 const guestSchema = require('../schemas/guest')
 const { ErrorHandler } = require('../helpers/errorHandlers')
+const { getCachedEventById } = require('../helpers/caching')
 
 // return all guests
 exports.allGuests = async (req, res, next) => {
@@ -42,7 +43,7 @@ exports.postGuest = async (req, res, next) => {
       throw new ErrorHandler(422, error.details[0].message)
     }
     await validateMongooseId(eventId)
-    const event = await Event.findById(eventId) // TODO Cache this
+    const event = await getCachedEventById(eventId)
     // checking if an event with this id exists
     if (!event) throw new ErrorHandler(404, 'Event with this id does not exist')
     isValidTimestamp(birthDate)
