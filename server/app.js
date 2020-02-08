@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 const { handleError } = require('./helpers/errorHandlers')
 
 const eventsRoutes = require('./routes/events')
+const guestsRoutes = require('./routes/guests')
 
 const app = express()
 
@@ -40,6 +41,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/events', eventsRoutes)
+app.use('/guests', guestsRoutes)
 
 app.use((err, req, res, next) => {
   handleError(err, res)

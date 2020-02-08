@@ -21,7 +21,19 @@ const validateMongooseId = async (id) => {
   }
 }
 
+const isValidTimestamp = (timestamp) => {
+  const parsedTimestamp = parseInt(timestamp)
+  if (isNaN(parsedTimestamp)) {
+    throw new ErrorHandler(401, 'Invalid timestamp')
+  }
+  const newTimestamp = new Date(parsedTimestamp).getTime()
+  if (!(!isNaN(parseFloat(newTimestamp)) && isFinite(newTimestamp))) {
+    throw new ErrorHandler(401, 'Invalid timestamp')
+  }
+}
+
 module.exports = {
   validateEvent,
-  validateMongooseId
+  validateMongooseId,
+  isValidTimestamp
 }

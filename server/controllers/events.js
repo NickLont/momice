@@ -41,7 +41,7 @@ exports.postEvent = async (req, res, next) => {
       : new Event({
         name
       })
-    event.save().catch(e => { throw new ErrorHandler(500, 'Data failed to save') })
+    await event.save().catch(e => { throw new ErrorHandler(500, 'Data failed to save') })
     res.status(200).json(event)
   } catch (e) {
     next(e)
@@ -56,12 +56,12 @@ exports.getEvent = async (req, res, next) => {
       throw new ErrorHandler(422, 'Event name or id is required')
     }
     if (name) {
-      const event = await Event.findOne({ name }).catch(e => { throw new ErrorHandler(500, 'Database Error') })
+      const event = await Event.findOne({ name }).populate('guests').catch(e => { throw new ErrorHandler(500, 'Database Error') })
       event ? res.status(200).json(event) : res.status(200).json({})
     }
     if (id) {
       await validateMongooseId(id)
-      const event = await Event.findOne({ _id: id }).catch(e => { throw new ErrorHandler(500, 'Database Error') })
+      const event = await Event.findOne({ _id: id }).populate('guests').catch(e => { throw new ErrorHandler(500, 'Database Error') })
       event ? res.status(200).json(event) : res.status(200).json({})
     }
   } catch (e) {
@@ -78,7 +78,6 @@ exports.deleteEvent = async (req, res, next) => {
     }
     await validateMongooseId(id)
     const deletedEvent = await Event.findByIdAndRemove(id)
-    console.log('deletedEvent: ', deletedEvent)
     if (!deletedEvent) throw new ErrorHandler(404, 'Event with this id does not exist')
     else {
       res.status(200).json(deletedEvent)
