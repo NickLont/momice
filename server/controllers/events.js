@@ -31,7 +31,7 @@ exports.allEvents = async (req, res, next) => {
 
 // post an event
 exports.postEvent = async (req, res, next) => {
-  const { name, description } = req.query
+  const { name, description } = req.body
   try {
     // return error response if name param is missing
     if (!name) {
