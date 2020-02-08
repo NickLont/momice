@@ -1,7 +1,8 @@
-const Event = require('../models/event')
-const { ErrorHandler } = require('../handlers/errorHandlers')
 const mongoose = require('mongoose')
 const isValidId = mongoose.Types.ObjectId.isValid
+const { validateEvent } = require('../helpers/validations')
+const Event = require('../models/event')
+const { ErrorHandler } = require('../helpers/errorHandlers')
 
 // return all events
 exports.allEvents = async (req, res, next) => {
@@ -33,15 +34,7 @@ exports.allEvents = async (req, res, next) => {
 exports.postEvent = async (req, res, next) => {
   const { name, description } = req.body
   try {
-    // return error response if name param is missing
-    if (!name) {
-      throw new ErrorHandler(422, 'Event name is required')
-    }
-    // check if event name already exists, if yes return error response
-    const existingEvent = await Event.findOne({ name })
-    if (existingEvent) {
-      throw new ErrorHandler(422, 'Event name already exists')
-    }
+    await validateEvent(name)
     const event = (description)
       ? new Event({
         name,

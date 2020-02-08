@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const express = require('express')
 const bodyParser = require('body-parser')
-const { handleError } = require('./handlers/errorHandlers')
+const { handleError } = require('./helpers/errorHandlers')
 
 const eventsRoutes = require('./routes/events')
 
