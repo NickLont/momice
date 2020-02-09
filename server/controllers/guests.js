@@ -1,5 +1,4 @@
 const Guest = require('../models/guest')
-const Event = require('../models/event')
 const { validateMongooseId, isValidTimestamp } = require('../helpers/validations')
 const guestSchema = require('../schemas/guest')
 const { ErrorHandler } = require('../helpers/errorHandlers')
@@ -34,9 +33,9 @@ exports.allGuests = async (req, res, next) => {
 // post a guest
 // we don't need to check if a user exists here, it can be a case of the same name
 exports.postGuest = async (req, res, next) => {
-  const { firstName, lastName, email, birthDate, hobbies, eventId } = req.body
+  const { firstName, lastName, email, birthDate, hobbies, eventId, gender } = req.body
   // Schema validation
-  const { value, error } = guestSchema.validate({ firstName, lastName, email, birthDate, hobbies, eventId })
+  const { value, error } = guestSchema.validate({ firstName, lastName, email, birthDate, hobbies, eventId, gender })
 
   try {
     if (error) {
@@ -53,7 +52,8 @@ exports.postGuest = async (req, res, next) => {
       email,
       birthDate: birthDate * 1000, // Timestamp epoch is in seconds and mongoose Date is in milliseconds
       hobbies,
-      event
+      event,
+      gender
     })
     event.guests.push(guest)
     await guest.save().catch(e => { throw new ErrorHandler(500, 'Data failed to save') })
