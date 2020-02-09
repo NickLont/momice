@@ -11,4 +11,5 @@ export const guestSchema = Yup.object().shape({
   password: Yup.string()
     .min(6, 'Password must be at least 6 characters')
     .required('Password is required')
+  // TODO fix the rest of the schema
 })

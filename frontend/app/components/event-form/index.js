@@ -1,23 +1,23 @@
 import React, { Component } from 'react'
 import { Formik, Field, Form, ErrorMessage, FieldArray } from 'formik'
+import PropTypes from 'prop-types'
 import { guestSchema } from 'utils/schemas/guest'
 import { Col, Row } from 'react-bootstrap'
 
 class EventForm extends Component {
+  static propTypes = {
+    events: PropTypes.array
+  }
+  static defaultProps = {
+    events: []
+  }
     onSubmit = (props) => {
       console.log(props)
     }
     render () {
+      const { events } = this.props
       const todaysDate = new Date().toISOString().split('T')[0]
       const hobbies = ['Video Games', 'Climbing', 'Sports', 'Drawing']
-      const events = [
-        { value: 'Food', label: 'Food' },
-        { value: 'Being Fabulous', label: 'Being Fabulous' },
-        { value: 'Ken Wheeler', label: 'Ken Wheeler' },
-        { value: 'ReasonML', label: 'ReasonML' },
-        { value: 'Unicorns', label: 'Unicorns' },
-        { value: 'Kittens', label: 'Kittens' }
-      ]
       const initialValues = {
         firstName: '',
         lastName: '',
@@ -25,9 +25,9 @@ class EventForm extends Component {
         dateOfBirth: '', // TODO this needs to be a timestamp
         gender: '',
         hobbies: [],
-        eventId: ''
+        eventId: events.length > 0 ? events[0]._id : ''
       }
-      return (
+      return events.length > 0 ? (
         <Formik
           initialValues={initialValues}
           validationSchema={guestSchema}
@@ -45,7 +45,7 @@ class EventForm extends Component {
                       className="form-control"
                     >
                       {events.map(event => (
-                        <option value={event.value} key={event.value}>{event.label}</option>
+                        <option value={event._id} key={event._id}>{event.name}: {event.description}</option>
                       ))}
                     </Field>
                     <ErrorMessage name="eventId" component="div" className="invalid-feedback" />
@@ -113,6 +113,7 @@ class EventForm extends Component {
                                   type="checkbox"
                                   value={hobbie}
                                   checked={values.hobbies.includes(hobbie)}
+                                  className="c-checkbox__checkbox"
                                   onChange={e => {
                                     if (e.target.checked) arrayHelpers.push(hobbie)
                                     else {
@@ -139,6 +140,8 @@ class EventForm extends Component {
             </Form>
           )}
         />
+      ) : (
+        <p className="text-center">No Events Available</p>
       )
     }
 }

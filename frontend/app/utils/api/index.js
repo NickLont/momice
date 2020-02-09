@@ -1,5 +1,5 @@
-import * as User from './user'
+import * as EventApi from './event'
 
 export {
-  User
+  EventApi
 }

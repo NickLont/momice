@@ -8,5 +8,5 @@ export const fetchEvents = async () => {
     console.log('axios error: ', e)
     throw e
   }
-  return res
+  return res.data
 }
