@@ -1,0 +1,37 @@
+/**
+* The main css file,
+* it should only import partials and
+* never include any code
+ */
+
+/*
+ * Font Importing
+*/
+//@import '~font-awesome/css/font-awesome.css';
+//@import url("https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:100,300,400");
+
+/*
+ * Base Styling
+*/
+@import "base/colors";
+@import "base/common";
+@import "base/fonts";
+@import "base/grid";
+@import "base/typography";
+
+/*
+ * Components Styling
+*/
+@import "components/homepage";
+
+/*
+ * Containers Styling
+*/
+@import "containers/navbar";
+
+/*
+ * Mixins
+*/
+
+/* Use this file for hotfixes and refactor later */
+@import "shame";

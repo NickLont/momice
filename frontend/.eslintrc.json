@@ -1,0 +1,34 @@
+{
+  "parser": "babel-eslint",  // necessary to use experimental features not supported in ESLint itself yet
+  "extends": [
+    "standard",
+    "eslint:recommended",
+    "plugin:react/recommended"
+    ],
+  "settings": {
+    "react": {
+      "pragma": "React",
+      "version": "16.8.6"
+    }
+  },
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+    "react/jsx-tag-spacing": ["error", {
+      "closingSlash": "never",
+      "beforeSelfClosing": "always",
+      "afterOpening": "never",
+      "beforeClosing": "never"
+    }],
+    "strict": 0,
+    "semi": ["error", "never"],
+    "no-console": 0,
+    "indent": "warn",
+    "comma-dangle": "warn",
+    "object-curly-spacing": ["warn", "always"],
+    "react/prop-types": ["warn"],
+    "no-unused-vars": "warn",
+    "react/jsx-no-comment-textnodes": "warn"
+  }
+}
