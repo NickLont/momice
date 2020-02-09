@@ -1,9 +1,9 @@
 import axios from './axios'
 
-export const fetchUser = async (user) => {
+export const fetchEvents = async () => {
   let res
   try {
-    res = await axios.get('/user', user)
+    res = await axios.get('/events/all')
   } catch (e) {
     console.log('axios error: ', e)
     throw e
