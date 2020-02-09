@@ -3,3 +3,4 @@ server/node_modules
 .idea
 mongoDB/mongo-volume/
 frontend/node_modules
+frontend/dist
