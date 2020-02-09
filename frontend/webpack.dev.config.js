@@ -1,11 +1,11 @@
-const path = require("path")
-const dotenv = require("dotenv-webpack")
+const path = require('path')
+const dotenv = require('dotenv-webpack')
 const dotenvPlugin = new dotenv({ path: path.resolve(__dirname, '../.env') })
-const htmlWebPackPlugin = require("html-webpack-plugin")
+const htmlWebPackPlugin = require('html-webpack-plugin')
 const htmlPlugin = new htmlWebPackPlugin({
-  template: path.resolve(__dirname, "./app/index.html"), // Location of source index.html
-  filename: "index.html", // Name of produced index.html,
-  chunksSortMode: "dependency" //Allows to control how chunks should be sorted before they are included to the html
+  template: path.resolve(__dirname, './app/index.html'), // Location of source index.html
+  filename: 'index.html', // Name of produced index.html,
+  chunksSortMode: 'dependency' // Allows to control how chunks should be sorted before they are included to the html
 })
 // const copyWebpackPlugin = require("copy-webpack-plugin")
 // const copyPlugin = new copyWebpackPlugin(
@@ -27,13 +27,13 @@ const htmlPlugin = new htmlWebPackPlugin({
 // )  Manual copy of assets to avoid importing in evey component (not optimal for Webpack)
 
 const webpackDevConfig = {
-  mode: "development",
+  mode: 'development',
   entry: {
     // We are telling webpack that we would like separate dependency graphs for each file here
     // optimally, there should be 1 file for each page of the app
     main: [
       '@babel/polyfill', // polyfill for Webpack 4 to use regenerators, Object.assign etc
-      path.resolve(__dirname, "app")
+      path.resolve(__dirname, 'app')
     ]
   },
   // we can produce a custom output bundle but this is optional since we use webpack-dev-server
@@ -48,15 +48,15 @@ const webpackDevConfig = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: [
-          { loader: "babel-loader" },
-          { loader: "eslint-loader" }
+          { loader: 'babel-loader' },
+          { loader: 'eslint-loader' }
         ]
       },
       {
         test: /\.html$/,
         use: [
           {
-            loader: "html-loader",
+            loader: 'html-loader',
             options: { minimize: true }
           }
         ]
@@ -64,16 +64,16 @@ const webpackDevConfig = {
       {
         test: /\.scss$/,
         loaders: [
-          "style-loader", // creates style nodes from JS strings
-          "css-loader", // translates CSS into CommonJS
-          "postcss-loader", // uses plugins defined in postcss.config.js , most important is autoprefixer
-          "sass-loader" // compiles Sass to CSS
+          'style-loader', // creates style nodes from JS strings
+          'css-loader', // translates CSS into CommonJS
+          'postcss-loader', // uses plugins defined in postcss.config.js , most important is autoprefixer
+          'sass-loader' // compiles Sass to CSS
           // these loader arrays work bottom to top
         ]
       },
       {
         test: /\.css$/,
-        loaders: ["style-loader", "postcss-loader", "css-loader"]
+        loaders: ['style-loader', 'postcss-loader', 'css-loader']
       },
       {
         test: /\.(png|jp(e*)g)$/,
@@ -84,10 +84,10 @@ const webpackDevConfig = {
         test: /\.(png|jp(e*)g)$/,
         use: [
           {
-            loader: "url-loader",
+            loader: 'url-loader',
             options: {
-              name: "[name].[ext]",
-              outputPath: "assets/images/",
+              name: '[name].[ext]',
+              outputPath: 'assets/images/',
               limit: 10 * 1024
               // inlining files below 10kB
               // → If image.png is smaller than 10 kB, `imageUrl` will include
@@ -113,10 +113,10 @@ const webpackDevConfig = {
         test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
         use: [
           {
-            loader: "file-loader",
+            loader: 'file-loader',
             options: {
-              name: "[name].[ext]",
-              outputPath: "assets/fonts/"
+              name: '[name].[ext]',
+              outputPath: 'assets/fonts/'
             }
           }
         ] // dynamic loading of imported fonts
@@ -133,7 +133,11 @@ const webpackDevConfig = {
   },
   devtool: 'source-map', // Create Sourcemaps for the bundle
   resolve: {
-    modules: [path.resolve("./app"), path.resolve("./node_modules")]
+    modules: [
+      path.resolve('./app'),
+      'node_modules'
+    ],
+    extensions: ['.js', '.json']
   }, // Path resolver to make relative imports available (assets/images instead of ../assets/images)
   devServer: {
     port: 8003

@@ -1,2 +1,3 @@
-export { default as Homepage } from "./pages/homepage"
-export { default as Navbar } from "./navigation"
+export EventApplicationPage from 'containers/pages/event-application'
+export GuestListPage from 'containers/pages/guest-list'
+export Navigation from 'containers/navigation'

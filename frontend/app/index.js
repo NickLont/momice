@@ -1,18 +1,17 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-import "assets/sass/style.scss"
-// import { Navbar } from 'containers'
-import Homepage from 'containers/pages/homepage'
+import 'assets/sass/style.scss'
+import { Navigation } from 'containers'
 
 class App extends Component {
-  render() {
+  render () {
     return (
-      <Homepage />
+      <Navigation />
     )
   }
 }
 
 ReactDOM.render(
   <App />,
-  document.getElementById("app")
+  document.getElementById('app')
 )

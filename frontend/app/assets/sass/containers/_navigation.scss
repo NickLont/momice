@@ -18,15 +18,18 @@
   }
   &__link {
     color: $color-white;
+    background: none;
     &--active {
-      color: $color-orange;
+      color: $color-white;
+      border-bottom: 2px solid white;
     }
     &:hover {
-      //color: $color-white;
-      //text-decoration: none;
-      //border: 0.2rem solid $color-white;
-      //padding: 0.5rem;
-      //font-weight: bold;
+      color: $color-white;
+      text-decoration: none;
+    }
+    &:focus {
+      color: $color-white;
+      text-decoration: none;
     }
   }
 }

@@ -1,62 +1,50 @@
 import React, { Component } from 'react'
-import { NavLink } from 'react-router-dom'
-import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
-import { UserSelector } from '../../selectors'
-import { UserActions } from '../../actions'
+import {
+  HashRouter as Router,
+  Switch,
+  Route,
+  NavLink
+} from 'react-router-dom'
+import { GuestListPage, EventApplicationPage } from 'containers'
 
-class Navbar extends Component {
-  static propTypes = {
-    logoutUser: PropTypes.func,
-    user: PropTypes.string
-  }
-  static defaultProps = {
-    user: 'Nick'
-  }
-  render() {
-    const { logoutUser, user } = this.props
+class Navigation extends Component {
+  render () {
     return (
-      <nav role="navigation">
-        <ul className="navbar">
-          <li className="navbar__item">
-            <NavLink
-              exact
-              to='/'
-              className="navbar__link"
-              activeClassName="navbar__link--active"
-            >
-              Item 1
-            </NavLink>
-          </li>
-          <li className="navbar__item">
-            <NavLink
-              to='/authentication'
-              className="navbar__link"
-              activeClassName="navbar__link--active"
-            >
-              Item 2
-            </NavLink>
-          </li>
-          <li
-            className="navbar__item"
-            onClick={logoutUser}
-          >
-            <span
-              className="navbar__link">
-              Logout {`${user || ''}`}
-            </span>
-          </li>
-        </ul>
-      </nav>
+      <Router>
+        <nav role="navigation">
+          <ul className="navbar">
+            <li className="navbar__item">
+              <NavLink
+                exact
+                to='/'
+                className="navbar__link"
+                activeClassName="navbar__link--active"
+              >
+                  Event Application
+              </NavLink>
+            </li>
+            <li className="navbar__item">
+              <NavLink
+                to='/guest-list'
+                className="navbar__link"
+                activeClassName="navbar__link--active"
+              >
+                  Guest List
+              </NavLink>
+            </li>
+          </ul>
+        </nav>
+        <Switch>
+          <Route path="/guest-list">
+            <GuestListPage />
+          </Route>
+          <Route path="/">
+            <EventApplicationPage />
+          </Route>
+        </Switch>
+      </Router>
     )
   }
 }
 
-const mapStateToProps = state => ({
-  user: UserSelector.getUser(state)
-})
-const mapDispatchToProps = dispatch => ({
-  logoutUser: () => dispatch(UserActions.logoutUser())
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Navbar)
+export default Navigation
