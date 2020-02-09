@@ -1,0 +1,9 @@
+.c-checkbox {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  &__container {
+    flex: 1 0 50%;
+  }
+}
