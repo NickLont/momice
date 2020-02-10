@@ -8,8 +8,11 @@ export const guestSchema = Yup.object().shape({
   email: Yup.string()
     .email('Email is invalid')
     .required('Email is required'),
-  password: Yup.string()
-    .min(6, 'Password must be at least 6 characters')
-    .required('Password is required')
-  // TODO fix the rest of the schema
+  dateOfBirth: Yup.date()
+    .required('Date of birth is required'),
+  gender: Yup.string()
+    .required('Gender'),
+  hobbies: Yup.array(),
+  eventId: Yup.string()
+    .required('Please select an event')
 })
