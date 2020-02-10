@@ -36,7 +36,7 @@ class Select extends Component {
           {defaultOptionLabel && <option value={''} defaultValue>{defaultOptionLabel}</option>}
           {children}
         </Field>
-        <ErrorMessage name={name} component="div" className="invalid-feedback" />
+        <ErrorMessage name={name} component="div" className="invalid-feedback c-form-control__errors" />
       </div>
     )
   }

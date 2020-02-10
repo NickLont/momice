@@ -11,7 +11,7 @@ export const guestSchema = Yup.object().shape({
   dateOfBirth: Yup.date()
     .required('Date of birth is required'),
   gender: Yup.string()
-    .required('Gender'),
+    .required('Gender is required'),
   hobbies: Yup.array(),
   eventId: Yup.string()
     .required('Please select an event')

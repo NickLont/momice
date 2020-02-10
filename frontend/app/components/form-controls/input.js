@@ -38,7 +38,7 @@ class Input extends Component {
           max={max}
           className={'form-control' + (errors && touched ? ' is-invalid' : '')}
         />
-        <ErrorMessage name={name} component="div" className="invalid-feedback" />
+        <ErrorMessage name={name} component="div" className="invalid-feedback c-form-control__errors" />
       </div>
     )
   }

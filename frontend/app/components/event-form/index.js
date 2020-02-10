@@ -5,6 +5,7 @@ import { guestSchema } from 'utils/schemas/guest'
 import { Col, Row } from 'react-bootstrap'
 import { GENDERS, HOBBIES } from '_constants'
 import { Input, Select, Checkbox } from 'components/form-controls'
+import { GuestApi } from 'utils/api/index'
 
 class EventForm extends Component {
   static propTypes = {
@@ -14,7 +15,7 @@ class EventForm extends Component {
     events: []
   }
     onSubmit = (props) => {
-      console.log(props)
+      console.log('props: ', props)
     }
     render () {
       const { events } = this.props

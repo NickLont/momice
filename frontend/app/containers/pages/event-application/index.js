@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-// import Button from 'react-bootstrap/lib/Button'
 import { EventForm } from 'components'
 import { EventApi } from 'utils/api/index'
 

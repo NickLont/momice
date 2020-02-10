@@ -1,0 +1,13 @@
+.c-checkbox {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  &__container {
+    flex: 1 0 50%;
+  }
+
+  &__checkbox {
+    margin-right: 10px !important;
+  }
+}

@@ -55,7 +55,7 @@ class Checkbox extends Component {
             </div>
           )}
         />
-        <ErrorMessage name={name} component="div" className="invalid-feedback" />
+        <ErrorMessage name={name} component="div" className="invalid-feedback c-form-control__errors" />
       </div>
     )
   }
