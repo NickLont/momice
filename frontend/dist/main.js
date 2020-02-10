@@ -86,6 +86,23 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./app/_constants.js":
+/*!***************************!*\
+  !*** ./app/_constants.js ***!
+  \***************************/
+/*! exports provided: GENDERS, HOBBIES */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GENDERS", function() { return GENDERS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HOBBIES", function() { return HOBBIES; });
+var GENDERS = ['Male', 'Female', 'Other'];
+var HOBBIES = ['Video Games', 'Climbing', 'Sports', 'Drawing'];
+
+
+/***/ }),
+
 /***/ "./app/assets/sass/style.scss":
 /*!************************************!*\
   !*** ./app/assets/sass/style.scss ***!
@@ -191,6 +208,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var utils_schemas_guest__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! utils/schemas/guest */ "./app/utils/schemas/guest.js");
 /* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/es/index.js");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! _constants */ "./app/_constants.js");
+/* harmony import */ var components_form_controls__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! components/form-controls */ "./app/components/form-controls/index.js");
+/* harmony import */ var utils_api_index__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! utils/api/index */ "./app/utils/api/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -201,9 +221,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -217,29 +237,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
+
+
 var EventForm =
 /*#__PURE__*/
 function (_Component) {
   _inherits(EventForm, _Component);
 
   function EventForm() {
-    var _getPrototypeOf2;
-
-    var _this;
-
     _classCallCheck(this, EventForm);
 
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(EventForm)).call.apply(_getPrototypeOf2, [this].concat(args)));
-
-    _defineProperty(_assertThisInitialized(_this), "onSubmit", function (props) {
-      console.log(props);
-    });
-
-    return _this;
+    return _possibleConstructorReturn(this, _getPrototypeOf(EventForm).apply(this, arguments));
   }
 
   _createClass(EventForm, [{
@@ -247,160 +256,114 @@ function (_Component) {
     value: function render() {
       var events = this.props.events;
       var todaysDate = new Date().toISOString().split('T')[0];
-      var hobbies = ['Video Games', 'Climbing', 'Sports', 'Drawing'];
       var initialValues = {
-        firstName: '',
-        lastName: '',
-        email: '',
-        dateOfBirth: '',
-        // TODO this needs to be a timestamp
-        gender: '',
-        hobbies: [],
-        eventId: events.length > 0 ? events[0]._id : ''
+        // firstName: '',
+        // lastName: '',
+        // email: '',
+        // birthDate: '',
+        // gender: '',
+        // hobbies: [],
+        // eventId: ''
+        firstName: 'Nikolaos',
+        lastName: 'Lontorfos',
+        email: 'nick@trest.gr',
+        birthDate: '1986-03-31',
+        gender: 'Male',
+        hobbies: ['Sports', 'Climbing'],
+        eventId: '5e3ed4a8f2fc6c257cc7c212'
       };
+
+      var onSubmit = function onSubmit() {
+        console.log('props: ');
+      };
+
       return events.length > 0 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_1__["Formik"], {
         initialValues: initialValues,
         validationSchema: utils_schemas_guest__WEBPACK_IMPORTED_MODULE_3__["guestSchema"],
-        onSubmit: this.onSubmit,
-        render: function render(_ref) {
-          var errors = _ref.errors,
-              status = _ref.status,
-              touched = _ref.touched,
-              values = _ref.values;
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_1__["Form"], null, console.log('values: ', values), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
-            md: 12
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "form-group"
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-            htmlFor: "eventId"
-          }, "Select Event"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_1__["Field"], {
-            name: "eventId",
-            as: "select",
-            className: "form-control"
-          }, events.map(function (event) {
-            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-              value: event._id,
-              key: event._id
-            }, event.name, ": ", event.description);
-          })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_1__["ErrorMessage"], {
-            name: "eventId",
-            component: "div",
-            className: "invalid-feedback"
-          })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
-            md: 6
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "form-group"
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-            htmlFor: "firstName"
-          }, "First Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_1__["Field"], {
-            name: "firstName",
-            type: "text",
-            className: 'form-control' + (errors.firstName && touched.firstName ? ' is-invalid' : '')
-          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_1__["ErrorMessage"], {
-            name: "firstName",
-            component: "div",
-            className: "invalid-feedback"
-          }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
-            md: 6
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "form-group"
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-            htmlFor: "lastName"
-          }, "Last Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_1__["Field"], {
-            name: "lastName",
-            type: "text",
-            className: 'form-control' + (errors.lastName && touched.lastName ? ' is-invalid' : '')
-          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_1__["ErrorMessage"], {
-            name: "lastName",
-            component: "div",
-            className: "invalid-feedback"
-          })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
-            md: 6
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "form-group"
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-            htmlFor: "email"
-          }, "Email"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_1__["Field"], {
-            name: "email",
-            type: "text",
-            className: 'form-control' + (errors.email && touched.email ? ' is-invalid' : '')
-          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_1__["ErrorMessage"], {
-            name: "email",
-            component: "div",
-            className: "invalid-feedback"
-          }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
-            md: 6
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "form-group"
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-            htmlFor: "dateOfBirth"
-          }, "Date of Birth"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_1__["Field"], {
-            name: "dateOfBirth",
-            type: "date",
-            max: todaysDate,
-            className: 'form-control' + (errors.dateOfBirth && touched.dateOfBirth ? ' is-invalid' : '')
-          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_1__["ErrorMessage"], {
-            name: "dateOfBirth",
-            component: "div",
-            className: "invalid-feedback"
-          })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
-            md: 6
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "form-group"
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-            htmlFor: "gender"
-          }, "Gender"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_1__["Field"], {
-            name: "gender",
-            type: "text",
-            className: 'form-control' + (errors.gender && touched.gender ? ' is-invalid' : '')
-          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_1__["ErrorMessage"], {
-            name: "gender",
-            component: "div",
-            className: "invalid-feedback"
-          }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
-            md: 6
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "form-group"
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-            htmlFor: "hobbies"
-          }, "Hobbies"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_1__["FieldArray"], {
-            name: "hobbies",
-            render: function render(arrayHelpers) {
-              return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-                className: "c-checkbox"
-              }, hobbies.map(function (hobbie, i) {
-                return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-                  className: "c-checkbox__container",
-                  key: i
-                }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-                  name: "categoryIds",
-                  type: "checkbox",
-                  value: hobbie,
-                  checked: values.hobbies.includes(hobbie),
-                  className: "c-checkbox__checkbox",
-                  onChange: function onChange(e) {
-                    if (e.target.checked) arrayHelpers.push(hobbie);else {
-                      var idx = values.hobbies.indexOf(hobbie);
-                      arrayHelpers.remove(idx);
-                    }
-                  }
-                }), ' ', hobbie));
-              }));
-            }
-          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_1__["ErrorMessage"], {
-            name: "hobbies",
-            component: "div",
-            className: "invalid-feedback"
-          })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "form-group"
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-            type: "submit",
-            className: "btn btn-primary mr-2"
-          }, "Register"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-            type: "reset",
-            className: "btn btn-secondary"
-          }, "Reset")));
+        onSubmit: function onSubmit(values, _ref) {
+          var setSubmitting = _ref.setSubmitting;
+          setSubmitting(false);
         }
+      }, function (_ref2) {
+        var errors = _ref2.errors,
+            touched = _ref2.touched,
+            values = _ref2.values,
+            handleSubmit = _ref2.handleSubmit;
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_1__["Form"], {
+          onSubmit: handleSubmit
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
+          md: 12
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(components_form_controls__WEBPACK_IMPORTED_MODULE_6__["Select"], {
+          name: "eventId",
+          label: "Event",
+          defaultOptionLabel: "Select an event",
+          errors: errors.eventId,
+          touched: touched.eventId
+        }, events.map(function (event) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: event._id,
+            key: event._id
+          }, event.name, ": ", event.description);
+        })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
+          md: 6
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(components_form_controls__WEBPACK_IMPORTED_MODULE_6__["Input"], {
+          name: "firstName",
+          label: "First Name",
+          errors: errors.firstName,
+          touched: touched.firstName
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
+          md: 6
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(components_form_controls__WEBPACK_IMPORTED_MODULE_6__["Input"], {
+          name: "lastName",
+          label: "Last Name",
+          errors: errors.lastName,
+          touched: touched.lastName
+        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
+          md: 6
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(components_form_controls__WEBPACK_IMPORTED_MODULE_6__["Input"], {
+          name: "email",
+          label: "E mail",
+          type: "email",
+          errors: errors.email,
+          touched: touched.email
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
+          md: 6
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(components_form_controls__WEBPACK_IMPORTED_MODULE_6__["Input"], {
+          name: "birthDate",
+          label: "Date of birth",
+          type: "date",
+          max: todaysDate,
+          errors: errors.birthDate,
+          touched: touched.birthDate
+        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
+          md: 6
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(components_form_controls__WEBPACK_IMPORTED_MODULE_6__["Select"], {
+          name: "gender",
+          label: "Gender",
+          defaultOptionLabel: "Select Gender",
+          errors: errors.gender,
+          touched: touched.gender
+        }, _constants__WEBPACK_IMPORTED_MODULE_5__["GENDERS"].map(function (gender, i) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: gender,
+            key: i
+          }, gender);
+        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
+          md: 6
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(components_form_controls__WEBPACK_IMPORTED_MODULE_6__["Checkbox"], {
+          name: "hobbies",
+          label: "Hobbies",
+          options: _constants__WEBPACK_IMPORTED_MODULE_5__["HOBBIES"],
+          values: values
+        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "form-group"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          type: "submit",
+          className: "btn btn-primary mr-2"
+        }, "Register"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          type: "reset",
+          className: "btn btn-secondary"
+        }, "Reset")));
       }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "text-center"
       }, "No Events Available");
@@ -419,6 +382,347 @@ _defineProperty(EventForm, "defaultProps", {
 });
 
 /* harmony default export */ __webpack_exports__["default"] = (EventForm);
+
+/***/ }),
+
+/***/ "./app/components/form-controls/checkbox.js":
+/*!**************************************************!*\
+  !*** ./app/components/form-controls/checkbox.js ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var formik__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! formik */ "./node_modules/formik/dist/formik.esm.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+var Checkbox =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(Checkbox, _Component);
+
+  function Checkbox() {
+    _classCallCheck(this, Checkbox);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(Checkbox).apply(this, arguments));
+  }
+
+  _createClass(Checkbox, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          name = _this$props.name,
+          label = _this$props.label,
+          options = _this$props.options,
+          values = _this$props.values;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: name
+      }, label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_1__["FieldArray"], {
+        name: name,
+        render: function render(arrayHelpers) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "c-checkbox"
+          }, options.map(function (option, i) {
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "c-checkbox__container",
+              key: i
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+              name: name,
+              type: "checkbox",
+              value: option,
+              checked: values[name].includes(option),
+              className: "c-checkbox__checkbox",
+              onChange: function onChange(e) {
+                if (e.target.checked) arrayHelpers.push(option);else {
+                  var idx = values[name].indexOf(option);
+                  arrayHelpers.remove(idx);
+                }
+              }
+            }), ' ', option));
+          }));
+        }
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_1__["ErrorMessage"], {
+        name: name,
+        component: "div",
+        className: "invalid-feedback c-form-control__errors"
+      }));
+    }
+  }]);
+
+  return Checkbox;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+_defineProperty(Checkbox, "propTypes", {
+  name: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
+  label: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
+  options: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.array,
+  values: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.object
+});
+
+_defineProperty(Checkbox, "defaultProps", {
+  name: '',
+  type: 'text',
+  label: '',
+  options: [],
+  values: {}
+});
+
+/* harmony default export */ __webpack_exports__["default"] = (Checkbox);
+
+/***/ }),
+
+/***/ "./app/components/form-controls/index.js":
+/*!***********************************************!*\
+  !*** ./app/components/form-controls/index.js ***!
+  \***********************************************/
+/*! exports provided: Input, Select, Checkbox */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _input__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./input */ "./app/components/form-controls/input.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Input", function() { return _input__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
+/* harmony import */ var _select__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./select */ "./app/components/form-controls/select.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Select", function() { return _select__WEBPACK_IMPORTED_MODULE_1__["default"]; });
+
+/* harmony import */ var _checkbox__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./checkbox */ "./app/components/form-controls/checkbox.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Checkbox", function() { return _checkbox__WEBPACK_IMPORTED_MODULE_2__["default"]; });
+
+
+
+
+
+
+/***/ }),
+
+/***/ "./app/components/form-controls/input.js":
+/*!***********************************************!*\
+  !*** ./app/components/form-controls/input.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var formik__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! formik */ "./node_modules/formik/dist/formik.esm.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+var Input =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(Input, _Component);
+
+  function Input() {
+    _classCallCheck(this, Input);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(Input).apply(this, arguments));
+  }
+
+  _createClass(Input, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          name = _this$props.name,
+          label = _this$props.label,
+          type = _this$props.type,
+          min = _this$props.min,
+          max = _this$props.max,
+          errors = _this$props.errors,
+          touched = _this$props.touched;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: name
+      }, label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_1__["Field"], {
+        name: name,
+        type: type,
+        min: min,
+        max: max,
+        className: 'form-control' + (errors && touched ? ' is-invalid' : '')
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_1__["ErrorMessage"], {
+        name: name,
+        component: "div",
+        className: "invalid-feedback c-form-control__errors"
+      }));
+    }
+  }]);
+
+  return Input;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+_defineProperty(Input, "propTypes", {
+  name: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
+  label: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
+  type: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
+  min: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number]),
+  max: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number]),
+  errors: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
+  touched: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool
+});
+
+_defineProperty(Input, "defaultProps", {
+  name: '',
+  type: 'text',
+  label: ''
+});
+
+/* harmony default export */ __webpack_exports__["default"] = (Input);
+
+/***/ }),
+
+/***/ "./app/components/form-controls/select.js":
+/*!************************************************!*\
+  !*** ./app/components/form-controls/select.js ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var formik__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! formik */ "./node_modules/formik/dist/formik.esm.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+var Select =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(Select, _Component);
+
+  function Select() {
+    _classCallCheck(this, Select);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(Select).apply(this, arguments));
+  }
+
+  _createClass(Select, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          name = _this$props.name,
+          label = _this$props.label,
+          defaultOptionLabel = _this$props.defaultOptionLabel,
+          children = _this$props.children,
+          errors = _this$props.errors,
+          touched = _this$props.touched;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: name
+      }, label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_1__["Field"], {
+        name: name,
+        as: "select",
+        className: 'form-control' + (errors && touched ? ' is-invalid' : '')
+      }, defaultOptionLabel && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: '',
+        defaultValue: true
+      }, defaultOptionLabel), children), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_1__["ErrorMessage"], {
+        name: name,
+        component: "div",
+        className: "invalid-feedback c-form-control__errors"
+      }));
+    }
+  }]);
+
+  return Select;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+_defineProperty(Select, "propTypes", {
+  name: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
+  label: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
+  defaultOptionLabel: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
+  children: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.node,
+  errors: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
+  touched: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool
+});
+
+_defineProperty(Select, "defaultProps", {
+  name: '',
+  type: 'text',
+  label: ''
+});
+
+/* harmony default export */ __webpack_exports__["default"] = (Select);
 
 /***/ }),
 
@@ -588,7 +892,6 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
- // import Button from 'react-bootstrap/lib/Button'
 
 
 
@@ -881,17 +1184,80 @@ function () {
 
 /***/ }),
 
+/***/ "./app/utils/api/guest.js":
+/*!********************************!*\
+  !*** ./app/utils/api/guest.js ***!
+  \********************************/
+/*! exports provided: postGuest */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postGuest", function() { return postGuest; });
+/* harmony import */ var _axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./axios */ "./app/utils/api/axios.js");
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+var postGuest =
+/*#__PURE__*/
+function () {
+  var _ref = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee(guest) {
+    var res;
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.prev = 0;
+            _context.next = 3;
+            return _axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/guests/guest', guest);
+
+          case 3:
+            res = _context.sent;
+            _context.next = 10;
+            break;
+
+          case 6:
+            _context.prev = 6;
+            _context.t0 = _context["catch"](0);
+            console.log('axios error: ', _context.t0);
+            throw _context.t0;
+
+          case 10:
+            return _context.abrupt("return", res.data);
+
+          case 11:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, null, [[0, 6]]);
+  }));
+
+  return function postGuest(_x) {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+/***/ }),
+
 /***/ "./app/utils/api/index.js":
 /*!********************************!*\
   !*** ./app/utils/api/index.js ***!
   \********************************/
-/*! exports provided: EventApi */
+/*! exports provided: EventApi, GuestApi */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _event__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./event */ "./app/utils/api/event.js");
 /* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "EventApi", function() { return _event__WEBPACK_IMPORTED_MODULE_0__; });
+/* harmony import */ var _guest__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./guest */ "./app/utils/api/guest.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "GuestApi", function() { return _guest__WEBPACK_IMPORTED_MODULE_1__; });
+
 
 
 
@@ -913,8 +1279,10 @@ var guestSchema = yup__WEBPACK_IMPORTED_MODULE_0__["object"]().shape({
   firstName: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required('First Name is required'),
   lastName: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required('Last Name is required'),
   email: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().email('Email is invalid').required('Email is required'),
-  password: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().min(6, 'Password must be at least 6 characters').required('Password is required') // TODO fix the rest of the schema
-
+  dateOfBirth: yup__WEBPACK_IMPORTED_MODULE_0__["date"]().required('Date of birth is required'),
+  gender: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required('Gender is required'),
+  hobbies: yup__WEBPACK_IMPORTED_MODULE_0__["array"](),
+  eventId: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required('Please select an event')
 });
 
 /***/ }),
@@ -13973,7 +14341,7 @@ module.exports = __webpack_require__(/*! ../modules/_core */ "./node_modules/cor
 
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, ".c-event-application-page{height:100%}.c-event-application-page__title{color:#f5a623;text-align:center}.navbar{display:-webkit-box;display:-ms-flexbox;display:flex;background:#1d428a;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;list-style:none;margin-bottom:0;border-radius:0;width:100vw;padding:0 80px 0 0;padding:0 5rem 0 0}.navbar__item{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;font-size:24px;font-size:1.5rem;padding:0 64px;padding:0 4rem;cursor:pointer}.navbar__link{color:#fff;background:none}.navbar__link--active{color:#fff;border-bottom:2px solid #fff}.navbar__link:focus,.navbar__link:hover{color:#fff;text-decoration:none}.c-checkbox{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;-ms-flex-wrap:wrap;flex-wrap:wrap}.c-checkbox__container{-webkit-box-flex:1;-ms-flex:1 0 50%;flex:1 0 50%}.c-checkbox__checkbox{margin-right:10px!important}", ""]);
+exports.push([module.i, ".c-form-control__errors{color:red}.c-checkbox{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;-ms-flex-wrap:wrap;flex-wrap:wrap}.c-checkbox__container{-webkit-box-flex:1;-ms-flex:1 0 50%;flex:1 0 50%}.c-checkbox__checkbox{margin-right:10px!important}.c-event-application-page{height:100%}.c-event-application-page__title{color:#f5a623;text-align:center}.navbar{display:-webkit-box;display:-ms-flexbox;display:flex;background:#1d428a;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;list-style:none;margin-bottom:0;border-radius:0;width:100vw;padding:0 80px 0 0;padding:0 5rem 0 0}.navbar__item{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;font-size:24px;font-size:1.5rem;padding:0 64px;padding:0 4rem;cursor:pointer}.navbar__link{color:#fff;background:none}.navbar__link--active{color:#fff;border-bottom:2px solid #fff}.navbar__link:focus,.navbar__link:hover{color:#fff;text-decoration:none}", ""]);
 
 
 

@@ -5,22 +5,22 @@ import { EventApi } from 'utils/api/index'
 class EventApplicationPage extends Component {
   state = {
     events: [],
-    eventsLoading: false
+    eventsLoaded: false
   }
   async componentDidMount () {
     const events = await EventApi.fetchEvents()
     this.setState({
       events: events,
-      eventsLoading: true
+      eventsLoaded: true
     })
   }
 
   render () {
-    const { events, eventsLoading } = this.state
+    const { events, eventsLoaded } = this.state
     return (
       <div className="container c-event-application-page">
         <h3 className="c-event-application-page__title">Event Submission</h3>
-        {(eventsLoading) ? (
+        {(eventsLoaded) ? (
           <EventForm events={events} />
         ) : (
           <p className="text-center">Loading Events...</p>

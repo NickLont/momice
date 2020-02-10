@@ -8,7 +8,7 @@ export const guestSchema = Yup.object().shape({
   email: Yup.string()
     .email('Email is invalid')
     .required('Email is required'),
-  dateOfBirth: Yup.date()
+  birthDate: Yup.date()
     .required('Date of birth is required'),
   gender: Yup.string()
     .required('Gender is required'),
