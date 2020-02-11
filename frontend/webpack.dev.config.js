@@ -1,8 +1,8 @@
 const path = require('path')
-const dotenv = require('dotenv-webpack')
-const dotenvPlugin = new dotenv({ path: path.resolve(__dirname, '../.env') })
-const htmlWebPackPlugin = require('html-webpack-plugin')
-const htmlPlugin = new htmlWebPackPlugin({
+const Dotenv = require('dotenv-webpack')
+const dotenvPlugin = new Dotenv({ path: path.resolve(__dirname, '.env') })
+const HtmlWebPackPlugin = require('html-webpack-plugin')
+const htmlPlugin = new HtmlWebPackPlugin({
   template: path.resolve(__dirname, './app/index.html'), // Location of source index.html
   filename: 'index.html', // Name of produced index.html,
   chunksSortMode: 'dependency' // Allows to control how chunks should be sorted before they are included to the html
@@ -140,6 +140,7 @@ const webpackDevConfig = {
     extensions: ['.js', '.json']
   }, // Path resolver to make relative imports available (assets/images instead of ../assets/images)
   devServer: {
+    host: '0.0.0.0',
     port: 8003
   } // Port webpack serves to
 }

@@ -1,6 +1,7 @@
 .env
+frontend/.env
 server/node_modules
 .idea
 mongoDB/mongo-volume/
 frontend/node_modules
-frontend/dist
+frontend/dist/
