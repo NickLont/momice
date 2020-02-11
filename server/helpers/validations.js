@@ -9,7 +9,7 @@ const validateEvent = async (name) => {
   }
 }
 
-const validateMongooseId = async (id) => {
+const validateMongooseId = (id) => {
   // checking if the id is valid
   if (!isValidId(id)) {
     throw new ErrorHandler(401, 'Invalid ID')

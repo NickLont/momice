@@ -25,8 +25,7 @@ const getCachedEventById = async (id) => {
     console.log('cached result')
     return cachedExistingEvent
   } else {
-    const existingEvent = await Event.findById(id)
-    console.log('existingEvent: ', existingEvent)
+    const existingEvent = await Event.findById(id).populate('guests')
     cache.set(`ExistingEvent-${id}`, existingEvent, 5)
     console.log('fresh result')
     return existingEvent

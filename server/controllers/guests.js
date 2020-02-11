@@ -1,4 +1,5 @@
 const Guest = require('../models/guest')
+const Event = require('../models/event')
 const { validateMongooseId, isValidTimestamp } = require('../helpers/validations')
 const guestSchema = require('../schemas/guest')
 const { ErrorHandler } = require('../helpers/errorHandlers')
@@ -41,11 +42,17 @@ exports.postGuest = async (req, res, next) => {
     if (error) {
       throw new ErrorHandler(422, error.details[0].message)
     }
-    await validateMongooseId(eventId)
-    const event = await getCachedEventById(eventId)
+    validateMongooseId(eventId)
+    // disabled caching, because need to check for registered emails at real time
+    // const event = await getCachedEventById(eventId)
+    const event = await Event.findById(eventId).populate('guests')
     // checking if an event with this id exists
     if (!event) throw new ErrorHandler(404, 'Event with this id does not exist')
     isValidTimestamp(birthDate)
+    const existingEmail = event.guests.find(guest => guest.email === email)
+    if (existingEmail) {
+      throw new ErrorHandler(404, 'Email already registered for this event')
+    }
     const guest = new Guest({
       firstName,
       lastName,
