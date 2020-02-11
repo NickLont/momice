@@ -29,6 +29,7 @@ class EventForm extends Component {
       eventId: ''
     }
     const onSubmit = async (values, setSubmitting, setStatus) => {
+      // transforming date from 31/03/1986 format to timestamp
       const birthDateTimestamp = new Date(values.birthDate).getTime()
       const submittingValues = {
         ...values,

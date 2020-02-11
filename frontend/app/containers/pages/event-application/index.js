@@ -8,7 +8,7 @@ class EventApplicationPage extends Component {
     eventsLoaded: false
   }
   async componentDidMount () {
-    const events = await EventApi.fetchEvents()
+    const events = await EventApi.getEvents()
     this.setState({
       events: events,
       eventsLoaded: true

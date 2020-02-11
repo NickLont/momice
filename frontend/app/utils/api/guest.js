@@ -10,3 +10,18 @@ export const postGuest = async (guest) => {
   }
   return res.data
 }
+
+export const deleteGuest = async (guestId) => {
+  let res
+  try {
+    res = await axios.delete('/guests/guest', {
+      data: {
+        id: guestId
+      }
+    })
+  } catch (e) {
+    console.log('axios error: ', e)
+    throw e
+  }
+  return res.data
+}

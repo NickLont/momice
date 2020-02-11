@@ -1,0 +1,10 @@
+.c-guest-list-page {
+  &__title {
+    color: $color-orange;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  &__event-select {
+    margin-bottom: 30px;
+  }
+}

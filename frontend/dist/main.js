@@ -213,6 +213,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var utils_api_index__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! utils/api/index */ "./app/utils/api/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -257,39 +265,83 @@ function (_Component) {
       var events = this.props.events;
       var todaysDate = new Date().toISOString().split('T')[0];
       var initialValues = {
-        // firstName: '',
-        // lastName: '',
-        // email: '',
-        // birthDate: '',
-        // gender: '',
-        // hobbies: [],
-        // eventId: ''
-        firstName: 'Nikolaos',
-        lastName: 'Lontorfos',
-        email: 'nick@trest.gr',
-        birthDate: '1986-03-31',
-        gender: 'Male',
-        hobbies: ['Sports', 'Climbing'],
-        eventId: '5e3ed4a8f2fc6c257cc7c212'
+        firstName: '',
+        lastName: '',
+        email: '',
+        birthDate: '',
+        gender: '',
+        hobbies: [],
+        eventId: ''
       };
 
-      var onSubmit = function onSubmit() {
-        console.log('props: ');
-      };
+      var _onSubmit =
+      /*#__PURE__*/
+      function () {
+        var _ref = _asyncToGenerator(
+        /*#__PURE__*/
+        regeneratorRuntime.mark(function _callee(values, setSubmitting, setStatus) {
+          var birthDateTimestamp, submittingValues;
+          return regeneratorRuntime.wrap(function _callee$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  // transforming date from 31/03/1986 format to timestamp
+                  birthDateTimestamp = new Date(values.birthDate).getTime();
+                  submittingValues = _objectSpread({}, values, {
+                    birthDate: Math.floor(birthDateTimestamp / 1000) // converting milliseconds
 
-      return events.length > 0 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_1__["Formik"], {
+                  });
+                  _context.prev = 2;
+                  _context.next = 5;
+                  return utils_api_index__WEBPACK_IMPORTED_MODULE_7__["GuestApi"].postGuest(submittingValues);
+
+                case 5:
+                  setStatus('Submission successful!');
+                  _context.next = 11;
+                  break;
+
+                case 8:
+                  _context.prev = 8;
+                  _context.t0 = _context["catch"](2);
+                  setStatus('Submission failed');
+
+                case 11:
+                  setSubmitting(false);
+
+                case 12:
+                case "end":
+                  return _context.stop();
+              }
+            }
+          }, _callee, null, [[2, 8]]);
+        }));
+
+        return function onSubmit(_x, _x2, _x3) {
+          return _ref.apply(this, arguments);
+        };
+      }();
+
+      return events.length > 0 ? // If we have more than 1 event, render the form
+      react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_1__["Formik"], {
         initialValues: initialValues,
         validationSchema: utils_schemas_guest__WEBPACK_IMPORTED_MODULE_3__["guestSchema"],
-        onSubmit: function onSubmit(values, _ref) {
-          var setSubmitting = _ref.setSubmitting;
-          setSubmitting(false);
+        onSubmit: function onSubmit(values, _ref2) {
+          var setSubmitting = _ref2.setSubmitting,
+              setStatus = _ref2.setStatus;
+
+          _onSubmit(values, setSubmitting, setStatus);
         }
-      }, function (_ref2) {
-        var errors = _ref2.errors,
-            touched = _ref2.touched,
-            values = _ref2.values,
-            handleSubmit = _ref2.handleSubmit;
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_1__["Form"], {
+      }, function (_ref3) {
+        var errors = _ref3.errors,
+            touched = _ref3.touched,
+            values = _ref3.values,
+            status = _ref3.status,
+            handleSubmit = _ref3.handleSubmit,
+            isSubmitting = _ref3.isSubmitting;
+        return status ? // If we have a result for form submission, show it instead of the form
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: "c-event-form__result-message"
+        }, status) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_1__["Form"], {
           onSubmit: handleSubmit
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
           md: 12
@@ -359,8 +411,9 @@ function (_Component) {
           className: "form-group"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           type: "submit",
-          className: "btn btn-primary mr-2"
-        }, "Register"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          className: "btn btn-primary mr-2",
+          disabled: isSubmitting
+        }, isSubmitting ? 'Submitting' : 'Register'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           type: "reset",
           className: "btn btn-secondary"
         }, "Reset")));
@@ -916,7 +969,7 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "state", {
       events: [],
-      eventsLoading: false
+      eventsLoaded: false
     });
 
     return _this;
@@ -940,7 +993,7 @@ function (_Component) {
                 events = _context.sent;
                 this.setState({
                   events: events,
-                  eventsLoading: true
+                  eventsLoaded: true
                 });
 
               case 4:
@@ -962,12 +1015,12 @@ function (_Component) {
     value: function render() {
       var _this$state = this.state,
           events = _this$state.events,
-          eventsLoading = _this$state.eventsLoading;
+          eventsLoaded = _this$state.eventsLoaded;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container c-event-application-page"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
         className: "c-event-application-page__title"
-      }, "Event Submission"), eventsLoading ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(components__WEBPACK_IMPORTED_MODULE_1__["EventForm"], {
+      }, "Event Submission"), eventsLoaded ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(components__WEBPACK_IMPORTED_MODULE_1__["EventForm"], {
         events: events
       }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "text-center"
@@ -1279,7 +1332,7 @@ var guestSchema = yup__WEBPACK_IMPORTED_MODULE_0__["object"]().shape({
   firstName: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required('First Name is required'),
   lastName: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required('Last Name is required'),
   email: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().email('Email is invalid').required('Email is required'),
-  dateOfBirth: yup__WEBPACK_IMPORTED_MODULE_0__["date"]().required('Date of birth is required'),
+  birthDate: yup__WEBPACK_IMPORTED_MODULE_0__["date"]().required('Date of birth is required'),
   gender: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required('Gender is required'),
   hobbies: yup__WEBPACK_IMPORTED_MODULE_0__["array"](),
   eventId: yup__WEBPACK_IMPORTED_MODULE_0__["string"]().required('Please select an event')
@@ -14341,7 +14394,7 @@ module.exports = __webpack_require__(/*! ../modules/_core */ "./node_modules/cor
 
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, ".c-form-control__errors{color:red}.c-checkbox{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;-ms-flex-wrap:wrap;flex-wrap:wrap}.c-checkbox__container{-webkit-box-flex:1;-ms-flex:1 0 50%;flex:1 0 50%}.c-checkbox__checkbox{margin-right:10px!important}.c-event-application-page{height:100%}.c-event-application-page__title{color:#f5a623;text-align:center}.navbar{display:-webkit-box;display:-ms-flexbox;display:flex;background:#1d428a;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;list-style:none;margin-bottom:0;border-radius:0;width:100vw;padding:0 80px 0 0;padding:0 5rem 0 0}.navbar__item{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;font-size:24px;font-size:1.5rem;padding:0 64px;padding:0 4rem;cursor:pointer}.navbar__link{color:#fff;background:none}.navbar__link--active{color:#fff;border-bottom:2px solid #fff}.navbar__link:focus,.navbar__link:hover{color:#fff;text-decoration:none}", ""]);
+exports.push([module.i, ".c-event-form__result-message{text-align:center;font-size:35px;font-weight:700}.c-form-control__errors{color:red}.c-checkbox{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;-ms-flex-wrap:wrap;flex-wrap:wrap}.c-checkbox__container{-webkit-box-flex:1;-ms-flex:1 0 50%;flex:1 0 50%}.c-checkbox__checkbox{margin-right:10px!important}.c-event-application-page{height:100%}.c-event-application-page__title{color:#f5a623;text-align:center}.navbar{display:-webkit-box;display:-ms-flexbox;display:flex;background:#1d428a;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;list-style:none;margin-bottom:0;border-radius:0;width:100vw;padding:0 80px 0 0;padding:0 5rem 0 0}.navbar__item{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;font-size:24px;font-size:1.5rem;padding:0 64px;padding:0 4rem;cursor:pointer}.navbar__link{color:#fff;background:none}.navbar__link--active{color:#fff;border-bottom:2px solid #fff}.navbar__link:focus,.navbar__link:hover{color:#fff;text-decoration:none}", ""]);
 
 
 
