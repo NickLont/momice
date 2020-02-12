@@ -3,7 +3,7 @@
 If you have Docker Engine installed locally, you can run the following composer command in your shell regardless of which operating system you are using:
 
 ```
-git clone https://github.com/NickLont/nodejs-assignment.git
+git clone https://github.com/NickLont/momice.git
 cd nodejs-assignment
 docker-compose build
 docker-compose up
