@@ -57,6 +57,8 @@ class GuestListPage extends Component {
           <Col md={12}>
             {eventsLoaded && (
               <select
+                id="guest-list"
+                name="guest-list"
                 className="form-control c-guest-list-page__event-select"
                 onChange={this.onChangeEvent} value={optionValue}
               >
@@ -87,7 +89,7 @@ class GuestListPage extends Component {
               </ul>
             )}
             {event && event.guests.length === 0 && (
-              <h4 className="text-center">No guests have subscribed to this event</h4>
+              <h4 className="no-guests text-center">No guests have subscribed to this event</h4>
             )}
           </Col>
         </Row>
