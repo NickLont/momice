@@ -32,6 +32,7 @@ class Input extends Component {
       <div className="form-group">
         <label htmlFor={name}>{label}</label>
         <Field
+          id={name}
           name={name}
           type={type}
           min={min}

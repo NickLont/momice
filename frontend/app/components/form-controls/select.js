@@ -29,6 +29,7 @@ class Select extends Component {
       <div className="form-group">
         <label htmlFor={name}>{label}</label>
         <Field
+          id={name}
           name={name}
           as='select'
           className={'form-control' + (errors && touched ? ' is-invalid' : '')}

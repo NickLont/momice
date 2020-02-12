@@ -30,5 +30,8 @@
     "react/prop-types": ["warn"],
     "no-unused-vars": "warn",
     "react/jsx-no-comment-textnodes": "warn"
+  },
+  "env": {
+    "jest": true
   }
 }

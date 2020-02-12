@@ -35,6 +35,7 @@ class Checkbox extends Component {
                 <div className="c-checkbox__container" key={i}>
                   <label>
                     <input
+                      id={option}
                       name={name}
                       type="checkbox"
                       value={option}
